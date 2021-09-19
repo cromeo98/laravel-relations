@@ -50,7 +50,6 @@ class PostController extends Controller
             'content' => 'required',
             'category_id' => 'nullable|exists:categories,id'
         ]);
-
         
         $data = $request->all();
 
