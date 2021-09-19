@@ -45,6 +45,21 @@
         <div>
             {{$posts->links()}}
         </div>
+        <h2>Post per categoria</h2>
+        {{-- Per ogni categoria presente mi scrivi il nome, e per ogni post associato a quella categoria mi scrivi il titolo del post--}}
+        @foreach ($categories as $category)
+        <h3 class="pt-2">{{$category->name}}</h3>
+            @forelse ($category->posts as $post)
+            <a href="{{route('admin.posts.show', $post->id)}}">{{$post->title}}</a>
+            @empty
+            <div>
+                <p class="d-inline-block">Non ci sono post per questa categoria</p>
+                <a href="{{route('admin.posts.create')}}">Scrivine uno</a>
+            </div>
+
+            @endforelse          
+        @endforeach
+
     </div>
     
 @endsection

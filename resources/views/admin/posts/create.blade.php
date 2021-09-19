@@ -37,6 +37,24 @@
                   @enderror
                   " id="content" placeholder="Inserisci il contenuto del post">{{old('content')}}</textarea>
                 </div>
+                @error('title')
+                <div class="alert alert-danger">{{$error}}</div> {{--or {{$message}} --}}
+                @enderror
+                <div class="card-text">
+                    <label for="category" class="form-label pt-2">Category</label>
+                    <select name="category_id" id="category" class="form-control">
+                        <option value="">-- Seleziona una categoria --</option>
+                        @foreach ($categories as $category)
+                            <option value="{{$category->id}}" {{-- necessario l'id nel value perchè è il dato da passare al db --}}
+                                @if ($category->id == old('category_id'))
+                                    selected
+                                @endif>
+                                {{$category->name}}
+                            </option>    
+                        @endforeach
+
+                    </select>
+                </div>
                 <div class="py-2">
                     <button type="submit" class="btn btn-primary ">Submit</button>
                     <a href="{{route('admin.posts.index')}}" class="btn btn-warning">Torna indietro</a>
